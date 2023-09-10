@@ -11,7 +11,7 @@
   
     "rules": {
       "no-unused-vars": "error",
-      "no-console":"error",
+      "no-console":"off",
       "no-undef":"error",
       "no-unused-expressions":"error",
       "no-unreachable":"error",
