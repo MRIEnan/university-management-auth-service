@@ -1,7 +1,8 @@
-import { User } from './users.model';
-import { IUser } from './users.interface';
+import { User } from './user.model';
+import { IUser } from './user.interface';
 import config from '../../../config';
-import { generateUserId } from './users.utils';
+import { generateUserId } from './user.utils';
+import ApiError from '../../../errors/ApiError';
 
 const createUser = async (user: {
   id: string;
@@ -18,11 +19,12 @@ const createUser = async (user: {
   const createdUser = await User.create(user);
 
   if (!createUser) {
-    throw new Error('Failed to create user!');
+    // throw new Error('Failed to create user!');
+    throw new ApiError(400, 'Failed to create user!');
   }
   return createdUser;
 };
 
-export default {
+export const UserService = {
   createUser,
 };

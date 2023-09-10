@@ -9,7 +9,8 @@ const myFormat = printf(({ level, message, label = 'default', timestamp }) => {
   const hour = date.getHours();
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
-  return `${date.toDateString()} ${hour}:${minutes}:${seconds} || ${label}," ${level}: ${message} "`;
+  // return {"formattedData" : `${date.toDateString()} ${hour}:${minutes}:${seconds} || ${label}," ${level}: ${message} `}
+  return `${date.toDateString()} ${hour}:${minutes}:${seconds} || ${label}," ${level}: ${message} `;
 });
 
 const logger = createLogger({
@@ -19,6 +20,7 @@ const logger = createLogger({
     timestamp(),
     myFormat,
     prettyPrint(),
+    // simple(),
   ),
   //   defaultMeta: { service: 'user-service' },
   transports: [
@@ -44,7 +46,8 @@ const errorLogger = createLogger({
     label({ label: 'Ohh!' }),
     timestamp(),
     myFormat,
-    prettyPrint(),
+    // prettyPrint(),
+    // simple(),
   ),
   transports: [
     new transports.Console(),
