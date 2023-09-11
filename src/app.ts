@@ -3,8 +3,8 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
-import { UserRoutes } from './app/modules/users/user.route';
 import ApiError from './errors/ApiError';
+import routes from './app/routes';
 
 const app: Application = express();
 
@@ -15,7 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Application routes
-app.use('/api/v1/users/', UserRoutes);
+app.use('/api/v1', routes);
+
+// app.use('/api/v1/users/', UserRoutes);
+// app.use('/api/v1/academic-semesters', AcademicSemesterRoute);
 
 // // testing
 // app.get('/', async (req: Request, res: Response, next: NextFunction) => {
