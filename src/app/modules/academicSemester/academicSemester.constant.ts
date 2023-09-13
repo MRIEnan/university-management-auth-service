@@ -35,5 +35,5 @@ export const academicSemesterTitleCodeMapper: {
 } = {
   Autumn: '01',
   Summer: '02',
-  Fall: '01',
+  Fall: '03',
 };
