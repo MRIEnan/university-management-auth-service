@@ -12,32 +12,40 @@ import ApiError from '../../../errors/ApiError';
 
 import httpStatus from 'http-status';
 
-const academicSemesterSchema = new Schema<IAcademicSemester>({
-  title: {
-    type: String,
-    required: true,
-    enum: academicSemesterTitle,
+const academicSemesterSchema = new Schema<IAcademicSemester>(
+  {
+    title: {
+      type: String,
+      required: true,
+      enum: academicSemesterTitle,
+    },
+    year: {
+      type: String,
+      required: true,
+    },
+    code: {
+      type: String,
+      required: true,
+      enum: academicSemesterCode,
+    },
+    startMonth: {
+      type: String,
+      required: true,
+      enum: academicSemesterMonth,
+    },
+    endMonth: {
+      type: String,
+      required: true,
+      enum: academicSemesterMonth,
+    },
   },
-  year: {
-    type: Number,
-    required: true,
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
   },
-  code: {
-    type: String,
-    required: true,
-    enum: academicSemesterCode,
-  },
-  startMonth: {
-    type: String,
-    required: true,
-    enum: academicSemesterMonth,
-  },
-  endMonth: {
-    type: String,
-    required: true,
-    enum: academicSemesterMonth,
-  },
-});
+);
 
 academicSemesterSchema.pre('save', async function (next) {
   const isExist = await AcademicSemester.findOne({
@@ -53,7 +61,6 @@ academicSemesterSchema.pre('save', async function (next) {
     next();
   }
 });
-
 export const AcademicSemester = model<IAcademicSemester, AcademicSemesterModel>(
   'AcademicSemester',
   academicSemesterSchema,
