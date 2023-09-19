@@ -5,14 +5,48 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 
-const createUser = catchAsync(
+const createStudent = catchAsync(
   async (req: Request, res: Response): Promise<IUser | void> => {
-    const { user } = req.body;
-    const result = await UserService.createUser(user);
+    const { student, ...user } = req.body;
+    const result = await UserService.createStudent(student, user);
     sendResponse<IUser>(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'user created successfully',
+      message: 'user of student created successfully',
+      data: result,
+    });
+    // res.status(200).json({
+    //   success  : true,
+    //   message: 'user created successfully',
+    //   data: result,
+    // });
+  },
+);
+const createFaculty = catchAsync(
+  async (req: Request, res: Response): Promise<IUser | void> => {
+    const { faculty, ...user } = req.body;
+    const result = await UserService.createFaculty(faculty, user);
+    sendResponse<IUser>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'user of faculty created successfully',
+      data: result,
+    });
+    // res.status(200).json({
+    //   success  : true,
+    //   message: 'user created successfully',
+    //   data: result,
+    // });
+  },
+);
+const createAdmin = catchAsync(
+  async (req: Request, res: Response): Promise<IUser | void> => {
+    const { admin, ...user } = req.body;
+    const result = await UserService.createAdmin(admin, user);
+    sendResponse<IUser>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'user of admin created successfully',
       data: result,
     });
     // res.status(200).json({
@@ -24,7 +58,9 @@ const createUser = catchAsync(
 );
 
 export const UserController = {
-  createUser,
+  createStudent,
+  createFaculty,
+  createAdmin,
 };
 
 // res.status(200).json({
